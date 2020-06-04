@@ -17,7 +17,7 @@ import { createAccessToken, createRefreshToken } from "./auth";
   app.use(
     cors({
       origin: "http://localhost:3000",
-      credentials: true
+      credentials: true,
     })
   );
   app.use(cookieParser());
@@ -57,9 +57,9 @@ import { createAccessToken, createRefreshToken } from "./auth";
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver]
+      resolvers: [UserResolver],
     }),
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({ req, res }),
   });
 
   apolloServer.applyMiddleware({ app, cors: false });
