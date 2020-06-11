@@ -5,6 +5,7 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Bye } from "./pages/Bye";
 import { Header } from "./Header";
+import { Admin } from "./pages/Admin";
 
 export const Routes: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ export const Routes: React.FC = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/post" component={Admin} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/bye" component={Bye} />
         </Switch>

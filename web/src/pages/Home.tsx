@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useUsersQuery } from "../generated/graphql";
-
+import "../App.css";
 interface Props {}
 
 export const Home: React.FC<Props> = () => {
@@ -11,10 +11,19 @@ export const Home: React.FC<Props> = () => {
   }
 
   return (
-    <div>
+    <div className="overlay_home">
       <div>users:</div>
       <ul>
-        {data.users.map(x => {
+        {data.users.map((x) => {
+          return (
+            <li key={x.id}>
+              {x.email}, {x.id}
+            </li>
+          );
+        })}
+      </ul>
+      <ul>
+        {data.users.map((x) => {
           return (
             <li key={x.id}>
               {x.email}, {x.id}

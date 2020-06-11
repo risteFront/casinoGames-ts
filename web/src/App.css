@@ -1,0 +1,220 @@
+body {
+  background: url("./assets/cover.jpg") no-repeat center center/cover;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center top;
+  background-attachment: fixed;
+}
+a {
+  text-decoration: none !important;
+}
+.logo {
+  max-width: 155px;
+  height: auto;
+}
+.header_container {
+  width: 100%;
+  max-height: 100px;
+  top: 0px;
+  background-color: #033633;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+.navs-header {
+  display: flex;
+  align-items: flex-end;
+}
+.navs-header > ul {
+  list-style-type: none;
+  display: flex;
+  margin-bottom: 0px;
+}
+.navs-header > ul li {
+  color: #c3b9b8;
+  cursor: pointer;
+  height: 2.5rem;
+  font-size: 1rem;
+  max-width: 120px;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 2rem;
+  transition: color 0.5s;
+}
+.navs-header > ul li:hover {
+  color: #fff;
+  border-bottom: 5px solid #77a007;
+}
+.admin-panel {
+  width: 110px;
+}
+
+.inheritStyle {
+  color: inherit;
+  text-decoration: inherit;
+}
+.inheritStyle:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.navbar-nav span[role="button"] {
+  padding: 15px;
+  display: inline-block;
+  line-height: 20px;
+}
+.home {
+  text-decoration: none;
+  color: aliceblue;
+  margin-right: 30px;
+}
+.home:hover {
+  text-decoration: none;
+  color: cadetblue;
+}
+.btn {
+  margin-left: 20px;
+}
+.badge-light {
+  margin-right: 30px;
+}
+.loginForm {
+  margin: auto;
+  max-width: 600px;
+  margin-top: 3rem;
+  background-color: #b0e0e6;
+  border-radius: 1rem;
+  padding: 3.5rem;
+  display: grid;
+}
+.btn-primary {
+  margin: auto;
+  width: 100%;
+  margin-top: 3rem;
+}
+@import "https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300";
+div[class*="box"] {
+  height: 33.33%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  line-height: 50px;
+  height: 50px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+  display: flex;
+}
+
+/* 
+========================
+    BUTTON ONE
+========================
+*/
+.box-1 a {
+  text-decoration: none !important;
+}
+.btn-one {
+  color: #fff !important;
+  transition: all 0.3s;
+  position: relative;
+  max-width: 6rem;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.btn-one span {
+  transition: all 0.3s;
+}
+.btn-one::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+  transform: scale(0.1, 1);
+}
+.btn-one:hover span {
+  letter-spacing: 2px;
+  color: #fff;
+}
+.btn-one:hover::before {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+.btn-one::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.3s;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.btn-one:hover::after {
+  opacity: 0;
+  transform: scale(0.1, 1);
+}
+.btn-two {
+  color: #fff;
+  transition: all 0.5s;
+  position: relative;
+  max-width: 5rem;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center;
+}
+.btn-two span {
+  z-index: 2;
+  display: block;
+  position: absolute;
+  width: 100%;
+  color: #fff;
+}
+.btn-two::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.5s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.btn-two::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.5s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.btn-two:hover::before {
+  transform: rotate(-45deg);
+  background-color: rgba(255, 255, 255, 0);
+}
+.btn-two:hover::after {
+  transform: rotate(45deg);
+  background-color: rgba(255, 255, 255, 0);
+}

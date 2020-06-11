@@ -10,8 +10,8 @@ export const App: React.FC<Props> = () => {
   useEffect(() => {
     fetch("http://localhost:4000/refresh_token", {
       method: "POST",
-      credentials: "include"
-    }).then(async x => {
+      credentials: "include",
+    }).then(async (x) => {
       const { accessToken } = await x.json();
       setAccessToken(accessToken);
       setLoading(false);

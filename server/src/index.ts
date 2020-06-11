@@ -4,16 +4,23 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./UserResolver";
+import { PostResolvers } from "./PostResolvers";
+import { GameResolver } from "./GameResolver";
 import { createConnection } from "typeorm";
+
 import cookieParser from "cookie-parser";
 import { verify } from "jsonwebtoken";
 import cors from "cors";
 import { User } from "./entity/User";
 import { sendRefreshToken } from "./sendRefreshToken";
 import { createAccessToken, createRefreshToken } from "./auth";
+//import { createServer } from "http";
+//const socketio = require("socket.io");
+const http = require("http");
 
 (async () => {
   const app = express();
+
   app.use(
     cors({
       origin: "http://localhost:3000",
@@ -49,6 +56,7 @@ import { createAccessToken, createRefreshToken } from "./auth";
     }
 
     sendRefreshToken(res, createRefreshToken(user));
+    console.log(user);
 
     return res.send({ ok: true, accessToken: createAccessToken(user) });
   });
@@ -57,17 +65,60 @@ import { createAccessToken, createRefreshToken } from "./auth";
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver],
+      resolvers: [UserResolver, PostResolvers, GameResolver],
     }),
     context: ({ req, res }) => ({ req, res }),
   });
 
   apolloServer.applyMiddleware({ app, cors: false });
+  const server = http.createServer(app);
+  // const io = socketio(server);
+  // io.on("connection", (socket: any) => {
+  //   console.log("user is connected");
+  //   // console.log(socket.connected); // logs true or false
+  //   socket.on("join", (data: any) => {
+  //     console.log(data);
+  //   });
+  //   // console.log(socket.connected); // logs true or false
+  //   socket.emit("message", { name: "bonusgame" });
+  //   socket.on("disconnect", () => {
+  //     console.log("User is disconected");
+  //   });
+  // });
+  // var serverPort = 4000;
+  // var webSocketPort = 3000;
 
-  app.listen(4000, () => {
-    console.log("express server started");
+  // var server = require("http")
+  //   .Server(app)
+  //   .listen(webSocketPort, function () {
+  //     console.log("WebSocket listening on port %d", 3000);
+  //   });
+
+  // app.listen(serverPort, function () {
+  //   console.log("Node server is listening on port %d", serverPort);
+  // });
+  // server.on("connection", function () {
+  //   console.log("a user connected");
+  // });
+
+  // server.listen(port, () => {
+  //   console.log(`Server listening on port ${port}`);
+  // });
+  server.listen(4000, () => {
+    console.log("server is runing on port 4000");
   });
 })();
+// const server = createServer(app);
+// let io = require("socket.io")(server);
+// const port = 4000;
+
+// io.on("connection", function () {
+//   console.log("a user connected");
+// });
+
+// server.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// });
 
 // createConnection().then(async connection => {
 

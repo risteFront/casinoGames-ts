@@ -7,7 +7,7 @@ import {
   Field,
   Ctx,
   UseMiddleware,
-  Int
+  Int,
 } from "type-graphql";
 import { hash, compare } from "bcryptjs";
 import { User } from "./entity/User";
@@ -17,7 +17,7 @@ import { isAuth } from "./isAuth";
 import { sendRefreshToken } from "./sendRefreshToken";
 import { getConnection } from "typeorm";
 import { verify } from "jsonwebtoken";
-
+import { Rules } from "./helpers/Role";
 @ObjectType()
 class LoginResponse {
   @Field()
@@ -36,7 +36,6 @@ export class UserResolver {
   @Query(() => String)
   @UseMiddleware(isAuth)
   bye(@Ctx() { payload }: MyContext) {
-    console.log(payload);
     return `your user id is: ${payload!.userId}`;
   }
 
@@ -103,7 +102,7 @@ export class UserResolver {
 
     return {
       accessToken: createAccessToken(user),
-      user
+      user,
     };
   }
 
@@ -117,7 +116,8 @@ export class UserResolver {
     try {
       await User.insert({
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        role: Rules.User,
       });
     } catch (err) {
       console.log(err);

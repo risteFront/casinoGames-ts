@@ -7,3 +7,5 @@ export const setAccessToken = (s: string) => {
 export const getAccessToken = () => {
   return accessToken;
 };
+
+//export const diconnect = () => {};

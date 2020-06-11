@@ -11,6 +11,7 @@ export type Scalars = {
   Float: number,
 };
 
+
 export type LoginResponse = {
    __typename?: 'LoginResponse',
   accessToken: Scalars['String'],
@@ -42,19 +43,39 @@ export type MutationRegisterArgs = {
   email: Scalars['String']
 };
 
+export type Posts = {
+   __typename?: 'Posts',
+  id: Scalars['Int'],
+  PostName: Scalars['String'],
+};
+
 export type Query = {
    __typename?: 'Query',
   hello: Scalars['String'],
   bye: Scalars['String'],
   users: Array<User>,
   me?: Maybe<User>,
+  admin: Array<User>,
+  posts: Array<Posts>,
 };
 
 export type User = {
    __typename?: 'User',
   id: Scalars['Int'],
   email: Scalars['String'],
+  role: Scalars['String'],
 };
+export type AdminQueryVariables = {};
+
+
+export type AdminQuery = (
+  { __typename?: 'Query' }
+  & { admin: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'role'>
+  )> }
+);
+
 export type ByeQueryVariables = {};
 
 
@@ -84,7 +105,7 @@ export type LoginMutation = (
     & Pick<LoginResponse, 'accessToken'>
     & { user: (
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'email'>
+      & Pick<User, 'id' | 'email' | 'role'>
     ) }
   ) }
 );
@@ -104,7 +125,7 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'email'>
+    & Pick<User, 'id' | 'email' | 'role'>
   )> }
 );
 
@@ -130,6 +151,24 @@ export type UsersQuery = (
   )> }
 );
 
+export const AdminDocument = gql`
+    query Admin {
+  admin {
+    id
+    role
+  }
+}
+    `;
+
+    export function useAdminQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<AdminQuery, AdminQueryVariables>) {
+      return ApolloReactHooks.useQuery<AdminQuery, AdminQueryVariables>(AdminDocument, baseOptions);
+    }
+      export function useAdminLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<AdminQuery, AdminQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<AdminQuery, AdminQueryVariables>(AdminDocument, baseOptions);
+      }
+      
+export type AdminQueryHookResult = ReturnType<typeof useAdminQuery>;
+export type AdminQueryResult = ApolloReactCommon.QueryResult<AdminQuery, AdminQueryVariables>;
 export const ByeDocument = gql`
     query Bye {
   bye
@@ -167,6 +206,7 @@ export const LoginDocument = gql`
     user {
       id
       email
+      role
     }
   }
 }
@@ -197,6 +237,7 @@ export const MeDocument = gql`
   me {
     id
     email
+    role
   }
 }
     `;

@@ -1,0 +1,6 @@
+query Admin {
+  admin {
+    id
+    role
+  }
+}
