@@ -2,7 +2,7 @@
 
 
 ## Make sure to setup PostgreSQL for the GraphQL server
-`sparkles`
+:wave:
 1. Install PostgreSQL on your computer
 2. Create database called `casinoGame`
 3. Navigate to `server` and `web` folders and press `yarn` or `npm install` 
