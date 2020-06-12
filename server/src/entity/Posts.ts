@@ -9,12 +9,18 @@ export class Posts extends BaseEntity {
   id: number;
 
   @Field()
-  @Column("text")
-  PostName: string;
+  @Column("text", { nullable: false })
+  name: string;
 
-  @Column("text")
-  Header: string;
+  @Field()
+  @Column("text", { nullable: true })
+  header: string;
 
-  @Column("text", { default: 0 })
-  Body: number;
+  @Field()
+  @Column("text", { nullable: true })
+  body: string;
+
+  @Field()
+  @Column("text", { nullable: false })
+  email: string;
 }

@@ -7,17 +7,8 @@ import {
   useLocation,
   NavLink,
 } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
 
-import {
-  useMeQuery,
-  useLogoutMutation,
-  useAdminQuery,
-} from "./generated/graphql";
+import { useMeQuery, useLogoutMutation } from "./generated/graphql";
 import { setAccessToken, getAccessToken } from "./accessToken";
 import io from "socket.io-client";
 import { Login } from "./pages/Login";
@@ -35,38 +26,9 @@ export const Header: React.FC<Props> = () => {
   let location = useLocation();
   const [room, setRoom] = useState({ email: "" });
   const [name, setName] = useState("");
+
   var socket: any;
-
-  // useEffect(() => {
-  //   // if (data && data.me && getAccessToken() == "") {
-  //   //   console.log("here");
-  //   socket = io(ENDPOINT);
-  //   if (data && data.me) {
-  //     setRoom({ email: data.me.email });
-  //     setName("room");
-  //     socket.emit("join", { name, room }, (error: any) => {
-  //       if (error) {
-  //         alert(error);
-  //       }
-  //     });
-  //   }
-  //   console.log(socket);
-  //   console.log(getAccessToken().length);
-  //   return () => {
-  //     socket.emit("disconnect");
-  //     socket.off();
-  //   };
-  // }, [getAccessToken().length > 1]);
   const [logout, { client }] = useLogoutMutation();
-  // useEffect(() => {
-  //   socket.on("message", (name) => {
-  //     console.log(name);
-  //   });
-
-  //   // socket.on("roomData", ({ users }) => {
-  //   //   setUsers(users);
-  //   // });
-  // }, []);
 
   let body: any = null;
 
@@ -105,12 +67,26 @@ export const Header: React.FC<Props> = () => {
       <img className="logo" src={Logo}></img>
       <div className="navs-header">
         <ul>
-          <Link to="/home">
-            <li>Home</li>
-          </Link>
-          <li>Posts</li>
+          {data && data.me ? (
+            <div style={{ display: "flex" }}>
+              <Link to="/home">
+                <li>Games</li>
+              </Link>
+              <Link to="/post">
+                <li>Posts</li>
+              </Link>
+            </div>
+          ) : null}
+
           {data && data.me && data.me.role == "Admins" ? (
-            <li className="admin-panel">Admin Panel</li>
+            <div className="admin-header">
+              <Link to="/admin">
+                <li className="admin-panel">Admin Panel</li>
+              </Link>
+              <Link to="/game">
+                <li className="game-panel">Add Game</li>
+              </Link>
+            </div>
           ) : null}
         </ul>
       </div>
@@ -125,85 +101,19 @@ export const Header: React.FC<Props> = () => {
             <span>REGISTER</span>
           </div>
         </Link>
-        <div
-          onClick={async () => {
-            await logout();
-            setAccessToken("");
-            await client!.resetStore();
-          }}
-          className="btn btn-two"
-        >
-          <span>LOGOUT</span>
-        </div>
+        {data && data.me ? (
+          <div
+            onClick={async () => {
+              await logout();
+              setAccessToken("");
+              await client!.resetStore();
+            }}
+            className="btn btn-two"
+          >
+            <span>LOGOUT</span>
+          </div>
+        ) : null}
       </div>
     </div>
-    // <Navbar bg="dark" variant="dark">
-    //   <img src={Logo}></img>
-    //   <Navbar.Brand href="#home">CasinoGames</Navbar.Brand>
-    //   <Nav className="mr-auto">
-    //     <NavLink to="/" className="home" href="#home">
-    //       Home
-    //     </NavLink>
-    //     <NavLink to="/posts" className="home" href="#post">
-    //       Posts
-    //     </NavLink>
-    //   </Nav>
-    //   <Form inline>
-    //     {data && data.me ? (
-    //       <Badge variant="light">User: {data.me.email}</Badge>
-    //     ) : null}
-
-    //     <Button variant="outline-info">
-    //       <Link className="inheritStyle" to="/login">
-    //         Login
-    //       </Link>
-    //     </Button>
-    //     <Button variant="outline-success">
-    //       <Link className="inheritStyle" to="/register">
-    //         Register
-    //       </Link>
-    //     </Button>
-    //     {!loading && data && data.me ? (
-    //       <Button
-    //         variant="outline-danger"
-    //         onClick={async () => {
-    //           await logout();
-    //           setAccessToken("");
-    //           await client!.resetStore();
-    //         }}
-    //       >
-    //         logout
-    //       </Button>
-    //     ) : null}
-    //   </Form>
-    // </Navbar>
-    // <header>
-    //   <div>
-    //     <Link to="/">home</Link>
-    //   </div>
-    //   <div>
-    //     <Link to="/register">register</Link>
-    //   </div>
-    //   <div>
-    //     <Link to="/login">login</Link>
-    //   </div>
-    //   <div>
-    //     <Link to="/bye">bye</Link>
-    //   </div>
-    //   <div>
-    //     {!loading && data && data.me ? (
-    //       <button
-    //         onClick={async () => {
-    //           await logout();
-    //           setAccessToken("");
-    //           await client!.resetStore();
-    //         }}
-    //       >
-    //         logout
-    //       </button>
-    //     ) : null}
-    //   </div>
-    //   {body}
-    // </header>
   );
 };

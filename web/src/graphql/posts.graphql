@@ -1,0 +1,7 @@
+query Posts($email: String!) {
+  posts(email: $email) {
+    name
+    header
+    body
+  }
+}

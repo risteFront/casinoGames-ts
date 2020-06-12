@@ -108,13 +108,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
           }}
         />
       </Form.Group>
-      <Button
-        on
-        as="input"
-        type="submit"
-        onClick={(e) => handleSubmit(e)}
-        value="Submit"
-      />
+      <Button type="submit" onClick={(e) => handleSubmit(e)} value="Submit" />
     </Form>
   );
 };

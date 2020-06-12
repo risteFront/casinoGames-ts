@@ -37,7 +37,7 @@ a {
   font-size: 1rem;
   max-width: 120px;
   font-family: "Montserrat", sans-serif;
-  margin-right: 2rem;
+  margin: 0 2rem;
   transition: color 0.5s;
 }
 .navs-header > ul li:hover {
@@ -46,6 +46,12 @@ a {
 }
 .admin-panel {
   width: 110px;
+}
+.admin-header {
+  display: flex;
+}
+.game-panel {
+  width: 6rem;
 }
 
 .inheritStyle {

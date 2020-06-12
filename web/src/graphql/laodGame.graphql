@@ -1,0 +1,8 @@
+query LoadGames {
+  loadGames {
+    name
+    description
+    price
+    url
+  }
+}

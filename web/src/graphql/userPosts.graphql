@@ -1,0 +1,8 @@
+mutation UserPost(
+  $name: String!
+  $header: String!
+  $body: String!
+  $email: String!
+) {
+  userPosts(name: $name, header: $header, body: $body, email: $email)
+}

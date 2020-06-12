@@ -1,0 +1,8 @@
+mutation Games(
+  $name: String!
+  $description: String!
+  $price: String!
+  $url: String!
+) {
+  games(name: $name, description: $description, price: $price, url: $url)
+}
