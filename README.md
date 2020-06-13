@@ -1,4 +1,4 @@
-# casinoGame GraphQl React.js Node.js PostgreSQL
+# CasinoGame GraphQL React.js Node.js PostgreSQL ApoloClient
 
 
 ## Make sure to setup PostgreSQL for the GraphQL server
